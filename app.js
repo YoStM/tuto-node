@@ -2,11 +2,44 @@ const EXPRESS = require("express");
 const MORGAN = require("morgan");
 const FAVICON = require("serve-favicon");
 const BODY_PARSER = require("body-parser");
+const { Sequelize, DataTypes } = require("sequelize");
 const { success, getUniqueId } = require("./helper");
 let pokemons = require("./mock-pokemon");
+const POKEMON_MODEL = require("./src/models/pokemon");
 
 const APP = EXPRESS();
 const PORT = 3000;
+
+const SQL = new Sequelize("pokedex", "root", "*", {
+  host: "localhost",
+  dialect: "mariadb",
+  dialectOptions: {
+    timezone: "Etc/GMT-2",
+  },
+  logging: false,
+});
+
+SQL.authenticate()
+  .then((_) =>
+    console.log("la connexion à la base de données a bien été établie")
+  )
+  .catch((error) =>
+    console.error(`Impossible de se connecter à la base de données ${error}`)
+  );
+
+const Pokemon = POKEMON_MODEL(SQL, DataTypes);
+
+SQL.sync({ force: true }).then((_) => {
+  console.log(`La base de données "Pokédex" a bien été synchronisée.`);
+  Pokemon.create({
+    name: "Bulbizarre",
+    hp: 25,
+    cp: 5,
+    picture:
+      "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png",
+    types: ["Plante", "Poison"].join(),
+  }).then((bulbizarre) => console.log(bulbizarre.toJSON()));
+});
 
 APP.use(FAVICON(__dirname + "/favicon.ico"))
   .use(MORGAN("dev"))
