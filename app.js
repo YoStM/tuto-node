@@ -19,6 +19,7 @@ require("./src/routes/findByPk_Pokemon")(APP);
 require("./src/routes/create_Pokemon")(APP);
 require("./src/routes/update_Pokemon")(APP);
 require("./src/routes/destroy_Pokemon")(APP);
+require("./src/routes/login")(APP);
 
 // add error management
 APP.use(({ res }) => {
