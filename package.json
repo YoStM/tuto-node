@@ -4,8 +4,8 @@
   "description": "Following a youtube tutorial - Simon Dieny Node JS tuto français pour débutant. Building REST API.",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_ENV=production node app.js",
+    "dev": "NODE_ENV=development nodemon app.js"
   },
   "author": "Yohan SAINT-MARTIN",
   "license": "ISC",
@@ -19,7 +19,6 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "morgan": "^1.10.0",
     "nodemon": "^2.0.15"
   }
 }

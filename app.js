@@ -1,18 +1,19 @@
 const EXPRESS = require("express");
-const MORGAN = require("morgan");
 const FAVICON = require("serve-favicon");
 const BODY_PARSER = require("body-parser");
 const SQL = require("./src/db/sequelize");
 const res = require("express/lib/response");
 
 const APP = EXPRESS();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-APP.use(FAVICON(__dirname + "/favicon.ico"))
-  .use(MORGAN("dev"))
-  .use(BODY_PARSER.json());
+APP.use(FAVICON(__dirname + "/favicon.ico")).use(BODY_PARSER.json());
 
 SQL.initDb();
+
+APP.get("/", (req, res) => {
+  res.json("Hello, Heroku ! ");
+});
 
 require("./src/routes/findAll_Pokemons")(APP);
 require("./src/routes/findByPk_Pokemon")(APP);
