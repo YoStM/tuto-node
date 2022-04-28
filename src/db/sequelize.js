@@ -5,7 +5,7 @@ const UserModel = require("../models/User");
 const Bcrypt = require("bcrypt");
 const { hash } = require("bcrypt");
 
-const sequelize = new Sequelize("pokedex", "root", "iP_hone/!indi4_Vaisselle", {
+const sequelize = new Sequelize("pokedex", "", "", {
   host: "localhost",
   dialect: "mariadb",
   dialectOptions: {
