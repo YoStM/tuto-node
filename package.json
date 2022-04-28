@@ -1,4 +1,9 @@
 {
+  
+    "engines": {
+        "node": "16.14.2"
+    },
+  
   "name": "node_js-demo",
   "version": "1.0.0",
   "description": "Following a youtube tutorial - Simon Dieny Node JS tuto français pour débutant. Building REST API.",

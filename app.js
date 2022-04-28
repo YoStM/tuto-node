@@ -2,11 +2,12 @@ const EXPRESS = require("express");
 const FAVICON = require("serve-favicon");
 const BODY_PARSER = require("body-parser");
 const SQL = require("./src/db/sequelize");
+const CORS = require('cors');
 
 const APP = EXPRESS();
 const PORT = process.env.PORT || 3000;
 
-APP.use(FAVICON(__dirname + "/favicon.ico")).use(BODY_PARSER.json());
+APP.use(FAVICON(__dirname + "/favicon.ico")).use(BODY_PARSER.json()).use(CORS());
 
 SQL.initDb();
 

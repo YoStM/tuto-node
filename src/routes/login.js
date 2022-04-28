@@ -1,5 +1,5 @@
 const { User } = require("../db/sequelize");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const JWT = require("jsonwebtoken");
 const PVTK = require("../auth/private_key");
 
