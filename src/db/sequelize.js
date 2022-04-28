@@ -2,10 +2,14 @@ const { Sequelize, DataTypes } = require("sequelize");
 const PokemonModel = require("../models/pokemon");
 const pokemons = require("./mock-pokemon");
 const UserModel = require("../models/User");
-const Bcrypt = require("bcrypt");
-const { hash } = require("bcrypt");
+const Bcrypt = require("bcryptjs");
 
-const sequelize = new Sequelize("pokedex", "", "", {
+let sequelize;
+
+if(process.env.NODE_ENV === 'production') {
+  sequelize = new Sequelize(process.env.JAWSDB_MARIA_URL)
+}
+sequelize = new Sequelize("pokedex", "", "", {
   host: "localhost",
   dialect: "mariadb",
   dialectOptions: {
@@ -18,7 +22,7 @@ const Pokemon = PokemonModel(sequelize, DataTypes);
 const User = UserModel(sequelize, DataTypes);
 
 const initDb = () => {
-  return sequelize.sync({ force: true }).then((_) => {
+  return sequelize.sync().then((_) => {
     pokemons.map((pokemon) => {
       Pokemon.create({
         name: pokemon.name,

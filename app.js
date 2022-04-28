@@ -2,7 +2,6 @@ const EXPRESS = require("express");
 const FAVICON = require("serve-favicon");
 const BODY_PARSER = require("body-parser");
 const SQL = require("./src/db/sequelize");
-const res = require("express/lib/response");
 
 const APP = EXPRESS();
 const PORT = process.env.PORT || 3000;
